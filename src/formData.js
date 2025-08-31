@@ -27,4 +27,4 @@ export const initialFormData = {
 };
 
 export const idTypes = ["Passport", "National ID", "Driver License"];
-export const currencies = ["USD", "EUR", "GBP", "NPR"];
+export const currencies = ["USD", "EUR", "GBP", "NPR","INR"];

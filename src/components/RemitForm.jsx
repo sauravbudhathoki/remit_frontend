@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
   sourceAgent: "",
@@ -27,13 +28,14 @@ const initialFormData = {
   remarks: ""
 };
 
-const idTypes = ["Passport", "National ID", "Driver License"];
-const currencies = ["USD", "EUR", "GBP", "NPR"];
+const idTypes = ["Passport", "National ID", "Driver License","CitizenShip"];
+const currencies = ["USD", "EUR", "GBP", "NPR", "INR"];
 
 const RemitForm = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,9 +71,9 @@ const RemitForm = () => {
 
   // --- Return JSX ---
   return (
-    <div className="container mt-4">
-      <div className="card shadow-sm p-4">
-        <h5 class="text-center">REMITTANCE FORM</h5>
+    <div className="container-responsive mt-4">
+      <div className=" col-12 col-md-6card shadow-sm p-4">
+        <h5 className="text-center">REMITTANCE FORM</h5>
         {message && <div className="alert alert-success">{message}</div>}
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -109,6 +111,7 @@ const RemitForm = () => {
                 <option value="Passport">Passport</option>
                 <option value="National ID">National ID</option>
                 <option value="Driver License">Driver License</option>
+                <option value="CitizenShip">CitizenShip</option>
               </select>
             </div>
             <div className="col-md-4 d-flex align-items-center">
@@ -146,6 +149,7 @@ const RemitForm = () => {
                 <option value="Passport">Passport</option>
                 <option value="National ID">National ID</option>
                 <option value="Driver License">Driver License</option>
+                <option value="CitizenShip">CitizenShip</option>
               </select>
             </div>
             <div className="col-md-4 d-flex align-items-center">
@@ -199,6 +203,7 @@ const RemitForm = () => {
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
                 <option value="NPR">NPR</option>
+                <option value="INR">INR</option>
               </select>
             </div>
             <div className="col-md-4 d-flex align-items-center">
@@ -218,9 +223,18 @@ const RemitForm = () => {
             </div>
           </div>
 
-          <div className="d-flex justify-content-end gap-2">
-            <button type="button" className="btn btn-outline-secondary" onClick={() => setFormData(initialFormData)}>Reset</button>
+          <div className="d-flex justify-content-between gap-2">
+            <button
+            className="btn btn-secondary border border-dark "
+            onClick={() => navigate("/all")}
+            title="Go to Remittances"
+          >
+            Back
+          </button>
+          <div>
+            <button type="button" className="btn btn-outline-secondary me-2" onClick={() => setFormData(initialFormData)}>Reset</button>
             <button type="submit" className="btn btn-dark">Submit</button>
+           </div>
           </div>
         </form>
       </div>

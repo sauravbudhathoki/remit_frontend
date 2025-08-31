@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 
-const idTypes = ["Passport", "National ID", "Driver License"];
-const currencies = ["USD", "EUR", "GBP", "NPR"];
+const idTypes = ["Passport", "National ID", "Driver License","CitizenShip"];
+const currencies = ["USD", "EUR", "GBP", "NPR", "INR"];
 
 const UpdateRemitForm = () => {
   const location = useLocation();
@@ -225,11 +225,21 @@ const UpdateRemitForm = () => {
             </div>
           </div>
 
-          <div className="d-flex justify-content-end gap-2">
-            <button type="submit" className="btn btn-dark">
+          
+          <div className="d-flex justify-content-end gap-2 mt-3">
+          
+          <button type="submit" className="btn btn-success">
               Update
             </button>
-          </div>
+
+          <button
+            className="btn btn-secondary border border-dark "
+            onClick={() => navigate("/all")}
+            title="Go to Remittances"
+          >
+            Back
+          </button>
+</div>
         </form>
       </div>
     </div>

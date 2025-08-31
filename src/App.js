@@ -5,6 +5,7 @@ import GetAllRemit from "./components/GetAllRemit";
 import ViewRemit from "./components/ViewRemit";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState, useEffect } from "react";
+import logo from "./assets/logo.jpg";
 
 function App() {
   const [dateTime, setDateTime] = useState(new Date());
@@ -19,17 +20,35 @@ function App() {
 
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <Link className="navbar-brand" to="/">RemitApp</Link>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-light">
+        <div className="container-fluid ">
+          <Link className="navbar-brand text-dark ms-2" to="/">
+          <img src={logo}
+          alt="RemitX"
+          style={{height:"40px"}}
+          />
+          </Link>
           <div className="d-flex align-items-center">
-            <div className="text-light me-3">
+            <div className="text-dark me-3">
               {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
             </div>
-            <Link className="btn btn-outline-light" to="/all">Remittances</Link>
+            <Link className=" text-dark text-decoration-none border border-dark px-3 py-1 rounded " to="/all">Remittances</Link>
+            <Link className=" text-dark text-decoration-none border border-dark px-3 py-1 rounded  ms-3 text-end" to="/" >Logout</Link>       
           </div>
+          </div>
+            </nav>
+
+            <nav className="navbar navbar-expand-lg bg-success">          
+            <div className="container ">
+              <Link className="btn text-light" to="/dashboard">DashBoard</Link>
+              <Link className="btn text-light " to="/kyc">KYC</Link>
+              <Link className="btn text-light" to="/settings">Settings</Link>
+               <Link className=" btn text-light" to="/profile">Commission</Link>
+                <Link className="btn text-light " to="/reports">Support</Link>
+                <Link className="btn text-light " to="/help">TT Invoice</Link>
         </div>
-      </nav>
+        </nav>
+    
 
       <div className="container mt-4">
         <Routes>
