@@ -45,40 +45,47 @@ const AllRemittances = () => {
   };
 
   // Search by sender name
-  const searchBySenderName = async () => {
-    if (!senderName) return;
-    setLoading(true);
-    setError("");
-    try {
-      let url = `http://localhost:8080/api/v1/remittance/sender?senderName=${encodeURIComponent(
-        senderName
-      )}`;
-      if (beneficiaryName) {
-        url += `&beneficiaryName=${encodeURIComponent(beneficiaryName)}`;
-      }
+  // Search by sender or beneficiary name
+const searchBySenderName = async () => {
+  // if (!senderName && !beneficiaryName) return;
+  setLoading(true);
+  setError("");
+  setSearchResult([]);
+  try {
+    let url = `http://localhost:8080/api/v1/remittance/sender?`;
+    const params = [];
 
-      console.log("Searching with URL:", url); // 👈 Debugging
-
-      const response = await fetch(url);
-      // try {
-      //   const response = await fetch(
-      //     `http://localhost:8080/api/v1/remittance/sender?senderName=${senderName}`
-      //   );
-      const data = await response.json();
-
-      if (response.ok && data.success && data.data) {
-        setSearchResult(data.data);
-      } else {
-        setError(data.message || "Remit not found");
-        setSearchResult([]);
-      }
-    } catch {
-      setError("Error connecting to backend");
-      setSearchResult([]);
-    } finally {
-      setLoading(false);
+    if (senderName) {
+      params.push(`senderName=${encodeURIComponent(senderName)}`);
     }
-  };
+    if (beneficiaryName) {
+      params.push(`beneficiaryName=${encodeURIComponent(beneficiaryName)}`);
+    }
+
+    url += params.join("&");
+
+    console.log("Searching with URL:", url); // 👈 Debugging
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok && data.success && data.data) {
+      setSearchResult(data.data);
+    } else {
+      setError(data.message || "Remit not found");
+      setSearchResult([]);
+    }
+  } catch {
+    setError("Error connecting to backend");
+    setSearchResult([]);
+  } finally {
+    setLoading(false);
+    //automatically clears the input fields after search
+    setSenderName("");
+    setBeneficiaryName("");
+  }
+};
+
 
   // Delete a remit
   const handleDelete = async (remitId) => {
